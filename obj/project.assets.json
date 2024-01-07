@@ -1,0 +1,153 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0-windows7.0": {
+      "InputSimulatorPlus/1.0.7": {
+        "type": "package",
+        "compile": {
+          "lib/net20/WindowsInput.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net20/WindowsInput.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "MouseKeyHook/5.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/Gma.System.MouseKeyHook.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/Gma.System.MouseKeyHook.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      }
+    }
+  },
+  "libraries": {
+    "InputSimulatorPlus/1.0.7": {
+      "sha512": "mOJt32qhvp3knYB8EEOh6/9cwZEwQV2BRD3DGZZ8guFg8vOt+xq6QGEt5eFjTkG+VWgVDMPVdCAIE4gnfab+3Q==",
+      "type": "package",
+      "path": "inputsimulatorplus/1.0.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "inputsimulatorplus.1.0.7.nupkg.sha512",
+        "inputsimulatorplus.nuspec",
+        "lib/net20/WindowsInput.dll",
+        "lib/net20/WindowsInput.pdb",
+        "lib/net20/WindowsInput.xml"
+      ]
+    },
+    "MouseKeyHook/5.7.1": {
+      "sha512": "c0VhB6cbcOpMOcoCQmvPMVqxaH76S4IPHwpbCIY7XKUNimdj9+81rX+Evnu5O53xYgUvdD7g0qmlVeZP2wGCnA==",
+      "type": "package",
+      "path": "mousekeyhook/5.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/Gma.System.MouseKeyHook.dll",
+        "lib/net48/Gma.System.MouseKeyHook.dll",
+        "lib/net6.0-windows7.0/Gma.System.MouseKeyHook.dll",
+        "lib/net7.0-windows7.0/Gma.System.MouseKeyHook.dll",
+        "mouse-keyboard-hook-logo64x64.png",
+        "mousekeyhook.5.7.1.nupkg.sha512",
+        "mousekeyhook.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0-windows7.0": [
+      "InputSimulatorPlus >= 1.0.7",
+      "MouseKeyHook >= 5.7.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\md\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\VS\\MHAiM\\MHAiM.csproj",
+      "projectName": "MHAiM",
+      "projectPath": "D:\\VS\\MHAiM\\MHAiM.csproj",
+      "packagesPath": "C:\\Users\\md\\.nuget\\packages\\",
+      "outputPath": "D:\\VS\\MHAiM\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\md\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
+        "dependencies": {
+          "InputSimulatorPlus": {
+            "target": "Package",
+            "version": "[1.0.7, )"
+          },
+          "MouseKeyHook": {
+            "target": "Package",
+            "version": "[5.7.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"InputSimulatorPlus 1.0.7\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net6.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "InputSimulatorPlus",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
+}

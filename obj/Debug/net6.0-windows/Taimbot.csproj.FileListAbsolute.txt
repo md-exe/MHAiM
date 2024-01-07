@@ -1,0 +1,79 @@
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\bin\Debug\net6.0-windows\Taimbot.exe
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\bin\Debug\net6.0-windows\Taimbot.deps.json
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\bin\Debug\net6.0-windows\Taimbot.runtimeconfig.json
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\bin\Debug\net6.0-windows\Taimbot.dll
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\bin\Debug\net6.0-windows\Taimbot.pdb
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\bin\Debug\net6.0-windows\WindowsInput.dll
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.AssemblyReference.cache
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.Form1.resources
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.GenerateResource.cache
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.AssemblyInfoInputs.cache
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.AssemblyInfo.cs
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.CoreCompileInputs.cache
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.CopyComplete
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.dll
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\refint\Taimbot.dll
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.pdb
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\Taimbot.genruntimeconfig.cache
+C:\Users\404-prep\AppData\Roaming\_t\Taimbot\obj\Debug\net6.0-windows\ref\Taimbot.dll
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\Taimbot.exe
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\Taimbot.deps.json
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\Taimbot.runtimeconfig.json
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\Taimbot.dll
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\Taimbot.pdb
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\WindowsInput.dll
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.AssemblyReference.cache
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.Form1.resources
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.GenerateResource.cache
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.GeneratedMSBuildEditorConfig.editorconfig
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.AssemblyInfoInputs.cache
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.AssemblyInfo.cs
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.CoreCompileInputs.cache
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.CopyComplete
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.dll
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\refint\Taimbot.dll
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.pdb
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\Taimbot.genruntimeconfig.cache
+G:\Work\VS_projects\Taimbot\obj\Debug\net6.0-windows\ref\Taimbot.dll
+G:\Work\VS_projects\Taimbot\bin\Debug\net6.0-windows\Gma.System.MouseKeyHook.dll
+D:\VS\Taimbot\bin\Debug\net6.0-windows\Taimbot.exe
+D:\VS\Taimbot\bin\Debug\net6.0-windows\Taimbot.deps.json
+D:\VS\Taimbot\bin\Debug\net6.0-windows\Taimbot.runtimeconfig.json
+D:\VS\Taimbot\bin\Debug\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot\bin\Debug\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot\bin\Debug\net6.0-windows\WindowsInput.dll
+D:\VS\Taimbot\bin\Debug\net6.0-windows\Gma.System.MouseKeyHook.dll
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.AssemblyReference.cache
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.Form1.resources
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.GenerateResource.cache
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.AssemblyInfoInputs.cache
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.AssemblyInfo.cs
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.CoreCompileInputs.cache
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.csproj.CopyComplete
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot\obj\Debug\net6.0-windows\refint\Taimbot.dll
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot\obj\Debug\net6.0-windows\Taimbot.genruntimeconfig.cache
+D:\VS\Taimbot\obj\Debug\net6.0-windows\ref\Taimbot.dll
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\Taimbot.exe
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\Taimbot.deps.json
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\Taimbot.runtimeconfig.json
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\WindowsInput.dll
+D:\VS\Taimbot — копия\bin\Debug\net6.0-windows\Gma.System.MouseKeyHook.dll
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.csproj.AssemblyReference.cache
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.Form1.resources
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.csproj.GenerateResource.cache
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.AssemblyInfoInputs.cache
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.AssemblyInfo.cs
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.csproj.CoreCompileInputs.cache
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.csproj.CopyComplete
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\refint\Taimbot.dll
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\Taimbot.genruntimeconfig.cache
+D:\VS\Taimbot — копия\obj\Debug\net6.0-windows\ref\Taimbot.dll

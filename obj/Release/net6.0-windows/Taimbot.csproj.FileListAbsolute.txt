@@ -1,0 +1,40 @@
+D:\VS\Taimbot\bin\Release\net6.0-windows\Taimbot.exe
+D:\VS\Taimbot\bin\Release\net6.0-windows\Taimbot.deps.json
+D:\VS\Taimbot\bin\Release\net6.0-windows\Taimbot.runtimeconfig.json
+D:\VS\Taimbot\bin\Release\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot\bin\Release\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot\bin\Release\net6.0-windows\WindowsInput.dll
+D:\VS\Taimbot\bin\Release\net6.0-windows\Gma.System.MouseKeyHook.dll
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.csproj.AssemblyReference.cache
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.Form1.resources
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.csproj.GenerateResource.cache
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.AssemblyInfoInputs.cache
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.AssemblyInfo.cs
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.csproj.CoreCompileInputs.cache
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.csproj.CopyComplete
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot\obj\Release\net6.0-windows\refint\Taimbot.dll
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot\obj\Release\net6.0-windows\Taimbot.genruntimeconfig.cache
+D:\VS\Taimbot\obj\Release\net6.0-windows\ref\Taimbot.dll
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\Taimbot.exe
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\Taimbot.deps.json
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\Taimbot.runtimeconfig.json
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\WindowsInput.dll
+D:\VS\Taimbot — копия\bin\Release\net6.0-windows\Gma.System.MouseKeyHook.dll
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.csproj.AssemblyReference.cache
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.Form1.resources
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.csproj.GenerateResource.cache
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.AssemblyInfoInputs.cache
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.AssemblyInfo.cs
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.csproj.CoreCompileInputs.cache
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.csproj.CopyComplete
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.dll
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\refint\Taimbot.dll
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.pdb
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\Taimbot.genruntimeconfig.cache
+D:\VS\Taimbot — копия\obj\Release\net6.0-windows\ref\Taimbot.dll
