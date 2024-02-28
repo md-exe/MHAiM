@@ -77,12 +77,10 @@ namespace MHAiM
             while (true)
             {
                 // Положение цветов на экране
-                //Point foundHeadColorPosition = new Point();
-                //Point foundBodyRedColorPosition = new Point();
-                //Point foundBodyBlueColorPosition = new Point();
-                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
-                Point foundBodyRedColorPosition = FindColorPosition(bodyRedColor, 862, 444, 930, 519);
-                Point foundBodyBlueColorPosition = FindColorPosition(bodyBlueColor, 862, 444, 930, 519);
+                Point foundHeadColorPosition = new Point();
+                Point foundBodyRedColorPosition = new Point();
+                Point foundBodyBlueColorPosition = new Point();
+
                 // Смена режимов
                 switch (lastPressedKey)
                 {
@@ -93,7 +91,10 @@ namespace MHAiM
                     case VirtualKeyCode.NUMPAD4:
                         UpdateSelectedModeLabel("AK-47");
                         state = 1;
-                        break;
+
+                        // Новые координаты для AK-47
+                        foundHeadColorPosition = FindColorPosition(headColor, 910, 465, 930, 485);
+                        goto action;
                     case VirtualKeyCode.NUMPAD5:
                         UpdateSelectedModeLabel("M4A1");
                         state = 2;
@@ -119,18 +120,19 @@ namespace MHAiM
                         state = 7;
                         break;
                 }
-                // Наведение на голову
-                if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0)
-                {
-                    PerformMouseAction(foundHeadColorPosition);
-                }
+                action:
+                    // Наведение на голову
+                    if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0)
+                    {
+                        PerformMouseAction(foundHeadColorPosition);
+                    }
                 // Наведение на тело
-                else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
-                {
-                    AWPtrigger();
-                }
+                //else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
+                //{
+                //    AWPtrigger();
+                //}
                 // Таймер для реалистичности
-                Thread.Sleep(5);
+                // Thread.Sleep(5);
             }
         }
         // Логика выстрелов, поведения
@@ -152,9 +154,10 @@ namespace MHAiM
                     case 1:
                         rndValue = rnd.Next(600, 700);
                         inputSimulator.Mouse.LeftButtonClick();
-                        inputSimulator.Mouse.LeftButtonClick();
-                        inputSimulator.Mouse.LeftButtonClick();
                         Thread.Sleep(rndValue);
+
+                        System.Diagnostics.Debug.WriteLine("123");
+
                         break;
                     // M4A1
                     case 2:
