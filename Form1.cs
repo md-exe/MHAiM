@@ -21,7 +21,7 @@ namespace MHAiM
         // Бинд зажима
         private Keys notPilote = Keys.LButton;
         // Бинд триггера
-        private Keys TriggetBtn = Keys.E;
+        private Keys TriggetBtn = Keys.T;
 
         // Инициализация цветов
         private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);
@@ -77,10 +77,12 @@ namespace MHAiM
             while (true)
             {
                 // Положение цветов на экране
-                Point foundHeadColorPosition = new Point();
-                Point foundBodyRedColorPosition = new Point();
-                Point foundBodyBlueColorPosition = new Point();
-
+                //Point foundHeadColorPosition = new Point();
+                //Point foundBodyRedColorPosition = new Point();
+                //Point foundBodyBlueColorPosition = new Point();
+                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
+                Point foundBodyRedColorPosition = FindColorPosition(bodyRedColor, 862, 444, 930, 519);
+                Point foundBodyBlueColorPosition = FindColorPosition(bodyBlueColor, 862, 444, 930, 519);
                 // Смена режимов
                 switch (lastPressedKey)
                 {
@@ -91,10 +93,7 @@ namespace MHAiM
                     case VirtualKeyCode.NUMPAD4:
                         UpdateSelectedModeLabel("AK-47");
                         state = 1;
-
-                        // Новые координаты для AK-47
-                        foundHeadColorPosition = FindColorPosition(headColor, 910, 465, 930, 485);
-                        goto action;
+                        break;
                     case VirtualKeyCode.NUMPAD5:
                         UpdateSelectedModeLabel("M4A1");
                         state = 2;
@@ -120,19 +119,18 @@ namespace MHAiM
                         state = 7;
                         break;
                 }
-                action:
-                    // Наведение на голову
-                    if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0)
-                    {
-                        PerformMouseAction(foundHeadColorPosition);
-                    }
+                // Наведение на голову
+                if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0)
+                {
+                    PerformMouseAction(foundHeadColorPosition);
+                }
                 // Наведение на тело
-                //else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
-                //{
-                //    AWPtrigger();
-                //}
+                else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
+                {
+                    AWPtrigger();
+                }
                 // Таймер для реалистичности
-                // Thread.Sleep(5);
+                Thread.Sleep(5);
             }
         }
         // Логика выстрелов, поведения
@@ -154,10 +152,9 @@ namespace MHAiM
                     case 1:
                         rndValue = rnd.Next(600, 700);
                         inputSimulator.Mouse.LeftButtonClick();
+                        inputSimulator.Mouse.LeftButtonClick();
+                        inputSimulator.Mouse.LeftButtonClick();
                         Thread.Sleep(rndValue);
-
-                        System.Diagnostics.Debug.WriteLine("123");
-
                         break;
                     // M4A1
                     case 2:
@@ -253,9 +250,9 @@ namespace MHAiM
             // Получение пикселя по координатам
             Color pixelColor = GetColorPixel(CursorX, CursorY);
             // Проверка цвета по RGB
-            if ((pixelColor.R > 250 && pixelColor.G < 5 && pixelColor.B < 5) || // Красный
-               (pixelColor.R < 5 && pixelColor.G < 5 && pixelColor.B > 250) || // Синий
-               (pixelColor.R < 5 && pixelColor.G > 250 && pixelColor.B < 5))  // Зелёный
+            if ((pixelColor.R > 180 && pixelColor.G < 10 && pixelColor.B < 10) || // Красный
+               (pixelColor.R < 10 && pixelColor.G < 10 && pixelColor.B > 180) || // Синий
+               (pixelColor.R < 10 && pixelColor.G > 180 && pixelColor.B < 10))  // Зелёный
             {
                 if (!IsHotkeyPressed(TriggetBtn))
                 {

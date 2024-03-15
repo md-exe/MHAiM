@@ -68,19 +68,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\md\\.nuget\\packages\\": {}
+    "C:\\Users\\404-prep\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS\\MHAiM\\MHAiM.csproj",
+      "projectUniqueName": "G:\\Work\\VS_projects\\MHAiM-main\\MHAiM.csproj",
       "projectName": "MHAiM",
-      "projectPath": "D:\\VS\\MHAiM\\MHAiM.csproj",
-      "packagesPath": "C:\\Users\\md\\.nuget\\packages\\",
-      "outputPath": "D:\\VS\\MHAiM\\obj\\",
+      "projectPath": "G:\\Work\\VS_projects\\MHAiM-main\\MHAiM.csproj",
+      "packagesPath": "C:\\Users\\404-prep\\.nuget\\packages\\",
+      "outputPath": "G:\\Work\\VS_projects\\MHAiM-main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\md\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\404-prep\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -134,7 +134,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
