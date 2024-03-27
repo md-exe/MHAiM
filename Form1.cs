@@ -39,7 +39,8 @@ namespace MHAiM
         // 4 - Deagle
         // 5 - Glock
         // 6 - USP-S
-        // 7 - AIM
+        // 7 - Copilot
+        // 8 - QuickDraw
 
         // Рандомайзер
         Random rnd = new Random();
@@ -80,9 +81,9 @@ namespace MHAiM
                 //Point foundHeadColorPosition = new Point();
                 //Point foundBodyRedColorPosition = new Point();
                 //Point foundBodyBlueColorPosition = new Point();
-                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
-                Point foundBodyRedColorPosition = FindColorPosition(bodyRedColor, 862, 444, 930, 519);
-                Point foundBodyBlueColorPosition = FindColorPosition(bodyBlueColor, 862, 444, 930, 519);
+                Point foundHeadColorPosition = FindColorPosition(headColor, 900, 480, 920, 495);
+                Point foundBodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
+                Point foundBodyBlueColorPosition = FindColorPosition(bodyBlueColor, 860, 440, 910, 490);
                 // Смена режимов
                 switch (lastPressedKey)
                 {
@@ -118,6 +119,10 @@ namespace MHAiM
                         UpdateSelectedModeLabel("Copilot");
                         state = 7;
                         break;
+                    case VirtualKeyCode.NUMPAD0:
+                        UpdateSelectedModeLabel("QuickDraw");
+                        state = 8;
+                        break;
                 }
                 // Наведение на голову
                 if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0)
@@ -129,8 +134,16 @@ namespace MHAiM
                 {
                     AWPtrigger();
                 }
+
                 // Таймер для реалистичности
-                Thread.Sleep(5);
+                if (state != 8)
+                {
+                    Thread.Sleep(10);
+                }
+                else
+                {
+                    Thread.Sleep(0);
+                }
             }
         }
         // Логика выстрелов, поведения
@@ -148,6 +161,9 @@ namespace MHAiM
                 // Проверка выбранного режима
                 switch (state)
                 {
+                    // STOP
+                    case 0:
+                        break;
                     // AK-47
                     case 1:
                         rndValue = rnd.Next(600, 700);
@@ -178,14 +194,15 @@ namespace MHAiM
                         inputSimulator.Mouse.LeftButtonClick();
                         Thread.Sleep(rndValue);
                         break;
+                    // USP-S
                     case 6:
-                        // USP-S
                         rndValue = rnd.Next(15, 25);
                         inputSimulator.Mouse.LeftButtonClick();
                         Thread.Sleep(rndValue);
                         break;
-                    // STOP
-                    case 7:
+                    // QuickDraw
+                    case 8:
+                        inputSimulator.Mouse.LeftButtonClick();
                         break;
                 }
             }

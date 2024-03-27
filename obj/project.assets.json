@@ -73,11 +73,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Work\\VS_projects\\MHAiM-main\\MHAiM.csproj",
+      "projectUniqueName": "G:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
       "projectName": "MHAiM",
-      "projectPath": "G:\\Work\\VS_projects\\MHAiM-main\\MHAiM.csproj",
+      "projectPath": "G:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
       "packagesPath": "C:\\Users\\404-prep\\.nuget\\packages\\",
-      "outputPath": "G:\\Work\\VS_projects\\MHAiM-main\\obj\\",
+      "outputPath": "G:\\Work\\VS_projects\\MHAiM\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\404-prep\\AppData\\Roaming\\NuGet\\NuGet.Config",

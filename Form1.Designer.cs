@@ -39,9 +39,10 @@
             // 
             // AKButton
             // 
-            AKButton.Location = new Point(12, 12);
+            AKButton.Location = new Point(14, 14);
+            AKButton.Margin = new Padding(4, 3, 4, 3);
             AKButton.Name = "AKButton";
-            AKButton.Size = new Size(75, 23);
+            AKButton.Size = new Size(88, 27);
             AKButton.TabIndex = 0;
             AKButton.Text = "AK-47";
             AKButton.UseVisualStyleBackColor = true;
@@ -49,9 +50,10 @@
             // 
             // M4Button
             // 
-            M4Button.Location = new Point(93, 12);
+            M4Button.Location = new Point(108, 14);
+            M4Button.Margin = new Padding(4, 3, 4, 3);
             M4Button.Name = "M4Button";
-            M4Button.Size = new Size(75, 23);
+            M4Button.Size = new Size(88, 27);
             M4Button.TabIndex = 1;
             M4Button.Text = "M4A1";
             M4Button.UseVisualStyleBackColor = true;
@@ -59,9 +61,10 @@
             // 
             // USPButton
             // 
-            USPButton.Location = new Point(174, 41);
+            USPButton.Location = new Point(203, 47);
+            USPButton.Margin = new Padding(4, 3, 4, 3);
             USPButton.Name = "USPButton";
-            USPButton.Size = new Size(75, 23);
+            USPButton.Size = new Size(88, 27);
             USPButton.TabIndex = 2;
             USPButton.Text = "USP-S";
             USPButton.UseVisualStyleBackColor = true;
@@ -69,18 +72,20 @@
             // 
             // AWPButton
             // 
-            AWPButton.Location = new Point(174, 12);
+            AWPButton.Location = new Point(203, 14);
+            AWPButton.Margin = new Padding(4, 3, 4, 3);
             AWPButton.Name = "AWPButton";
-            AWPButton.Size = new Size(75, 23);
+            AWPButton.Size = new Size(88, 27);
             AWPButton.TabIndex = 7;
             AWPButton.Text = "AWP";
             AWPButton.Click += AWPButton_Click;
             // 
             // GlockButton
             // 
-            GlockButton.Location = new Point(93, 41);
+            GlockButton.Location = new Point(108, 47);
+            GlockButton.Margin = new Padding(4, 3, 4, 3);
             GlockButton.Name = "GlockButton";
-            GlockButton.Size = new Size(75, 23);
+            GlockButton.Size = new Size(88, 27);
             GlockButton.TabIndex = 4;
             GlockButton.Text = "Glock";
             GlockButton.UseVisualStyleBackColor = true;
@@ -88,9 +93,10 @@
             // 
             // DeagleButton
             // 
-            DeagleButton.Location = new Point(12, 41);
+            DeagleButton.Location = new Point(14, 47);
+            DeagleButton.Margin = new Padding(4, 3, 4, 3);
             DeagleButton.Name = "DeagleButton";
-            DeagleButton.Size = new Size(75, 23);
+            DeagleButton.Size = new Size(88, 27);
             DeagleButton.TabIndex = 3;
             DeagleButton.Text = "Deagle";
             DeagleButton.UseVisualStyleBackColor = true;
@@ -99,18 +105,19 @@
             // SelectedModeLabel
             // 
             SelectedModeLabel.AutoSize = true;
-            SelectedModeLabel.Location = new Point(12, 70);
+            SelectedModeLabel.Location = new Point(14, 81);
+            SelectedModeLabel.Margin = new Padding(4, 0, 4, 0);
             SelectedModeLabel.Name = "SelectedModeLabel";
-            SelectedModeLabel.Size = new Size(113, 13);
+            SelectedModeLabel.Size = new Size(124, 15);
             SelectedModeLabel.TabIndex = 6;
             SelectedModeLabel.Text = "Выбран режим: STOP";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(263, 92);
+            ClientSize = new Size(307, 102);
             Controls.Add(SelectedModeLabel);
             Controls.Add(AWPButton);
             Controls.Add(GlockButton);
@@ -118,9 +125,10 @@
             Controls.Add(USPButton);
             Controls.Add(M4Button);
             Controls.Add(AKButton);
+            Margin = new Padding(4, 3, 4, 3);
             MaximizeBox = false;
-            MaximumSize = new Size(279, 127);
-            MinimumSize = new Size(279, 127);
+            MaximumSize = new Size(323, 141);
+            MinimumSize = new Size(323, 141);
             Name = "Form1";
             Text = "AiM";
             Load += Form1_Load;
