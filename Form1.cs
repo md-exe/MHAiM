@@ -81,7 +81,7 @@ namespace MHAiM
                 //Point foundHeadColorPosition = new Point();
                 //Point foundBodyRedColorPosition = new Point();
                 //Point foundBodyBlueColorPosition = new Point();
-                Point foundHeadColorPosition = FindColorPosition(headColor, 900, 480, 920, 495);
+                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
                 Point foundBodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
                 Point foundBodyBlueColorPosition = FindColorPosition(bodyBlueColor, 860, 440, 910, 490);
                 // Смена режимов
@@ -125,7 +125,7 @@ namespace MHAiM
                         break;
                 }
                 // Наведение на голову
-                if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0)
+                if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0 && state != 8)
                 {
                     PerformMouseAction(foundHeadColorPosition);
                 }
@@ -136,14 +136,19 @@ namespace MHAiM
                 }
 
                 // Таймер для реалистичности
-                if (state != 8)
+                if ((!foundHeadColorPosition.IsEmpty) && (state == 8))
                 {
-                    Thread.Sleep(10);
+                    QuickDrawAction(foundHeadColorPosition);
                 }
-                else
+
+                if (state == 8)
                 {
                     Thread.Sleep(0);
                 }
+                else
+                {
+                    Thread.Sleep(10);
+                }  
             }
         }
         // Логика выстрелов, поведения
@@ -201,9 +206,10 @@ namespace MHAiM
                         Thread.Sleep(rndValue);
                         break;
                     // QuickDraw
-                    case 8:
-                        inputSimulator.Mouse.LeftButtonClick();
-                        break;
+                    //case 8:
+                    //    Point foundHeadColorPosition = FindColorPosition(headColor, 900, 480, 920, 495);
+                    //    QuickDrawAction(foundHeadColorPosition);
+                    //    break;
                 }
             }
             //else
@@ -258,6 +264,31 @@ namespace MHAiM
             catch
             {
                 return Point.Empty;
+            }
+        }
+
+        // QuickDraw script
+        public void QuickDrawAction(Point foundColorPosition)
+        {
+            if (!foundColorPosition.IsEmpty)
+            {
+                Color pixelColor = GetColorPixel(CursorX, CursorY);
+                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
+
+                if (!foundHeadColorPosition.IsEmpty)
+                {
+                    // Координаты движения мыши
+                    int xOffset = foundHeadColorPosition.X - 886;
+                    int yOffset = foundHeadColorPosition.Y - 472;
+
+                    inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+                    if (pixelColor != headColor)
+                    {
+                        foundHeadColorPosition = FindColorPosition(headColor, 825, 440, 960, 575);
+                        inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+                    }
+                    inputSimulator.Mouse.LeftButtonClick();
+                }
             }
         }
 
