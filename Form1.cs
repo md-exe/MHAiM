@@ -171,9 +171,11 @@ namespace MHAiM
                         break;
                     // AK-47
                     case 1:
-                        rndValue = rnd.Next(600, 700);
+                        rndValue = rnd.Next(10, 20);
                         inputSimulator.Mouse.LeftButtonClick();
+                        Thread.Sleep(rndValue);
                         inputSimulator.Mouse.LeftButtonClick();
+                        Thread.Sleep(rndValue);
                         inputSimulator.Mouse.LeftButtonClick();
                         Thread.Sleep(rndValue);
                         break;
