@@ -1,3 +1,4 @@
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using WindowsInput;
 using WindowsInput.Native;
@@ -85,6 +86,8 @@ namespace MHAiM
                 Point bodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
                 Point bodyBlueColorPosition = FindColorPosition(bodyBlueColor, 860, 440, 910, 490);
 
+                Point rageHead = FindColorPosition(headColor, 681, 367, 1078, 603);
+
                 // Смена режимов
                 switch (lastPressedKey)
                 {
@@ -107,7 +110,7 @@ namespace MHAiM
                     case VirtualKeyCode.NUMPAD1:
                         UpdateSelectedModeLabel("Deagle");
                         state = 4;
-                        PerformMouseAction(headColorPosition, Point.Empty, Point.Empty);
+                        PerformMouseAction(rageHead, Point.Empty, Point.Empty);
                         break;
                     case VirtualKeyCode.NUMPAD2:
                         UpdateSelectedModeLabel("Glock");
@@ -177,16 +180,13 @@ namespace MHAiM
             if (!headValue.IsEmpty && blueValue.IsEmpty && redValue.IsEmpty)
             {
                 // Сдвиг относительно найденной головы
-                xOffset = headValue.X - 886;
-                yOffset = headValue.Y - 472;
+                xOffset = headValue.X - 886; // 886
+                yOffset = headValue.Y - 472; // 472
 
-                do
-                {
-                    // Движение мыши на голову
-                    inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-                } while (pixelColor != headColor);
+                // Движение мыши на голову
+                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
 
-                inputSimulator.Mouse.LeftButtonClick();
+                //inputSimulator.Mouse.LeftButtonClick();
             }
         }
 
@@ -293,21 +293,19 @@ namespace MHAiM
         // Функция получение цвета пикселя
         public static Color GetColorPixel(int x, int y)
         {
-            try
+            // Цвет пикселя под курсором
+            Bitmap bmp = new Bitmap(5, 5);
+            // -1, -1 для смещения на пиксель выше, ибо прицел у AWP красный
+            Rectangle lockRectangle = new Rectangle(new Point(), bmp.Size);
+            BitmapData data = bmp.LockBits(lockRectangle, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+
+            unsafe
             {
-                // Цвет пикселя под курсором
-                Bitmap bmp = new Bitmap(3, 3);
-                // -1, -1 для смещения на пиксель выше, ибо прицел у AWP красный
-                Rectangle bounds = new Rectangle(x - 1, y - 1, 3, 3);
-                using (Graphics g = Graphics.FromImage(bmp))
-                    g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
-                return bmp.GetPixel(1, 0);
+                int* pointer = (int*)data.Scan0;
+                int firstPixel = pointer[0];
+                int lastPixel = pointer[data.Height * (data.Width - 1) + data.Width - 1];
             }
-            catch
-            {
-                Bitmap bmp = new Bitmap(1, 1);
-                return bmp.GetPixel(0, 0);
-            }
+            bmp.UnlockBits(data);
         }
 
 
