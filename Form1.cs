@@ -25,7 +25,6 @@ namespace MHAiM
 
         // Инициализация цветов
         private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);
-        private Color nowColor;
         private Color bodyRedColor = Color.FromArgb(0xFF, 0x00, 0x00);
         private Color bodyBlueColor = Color.FromArgb(0x00, 0x00, 0xFF);
 
@@ -49,6 +48,10 @@ namespace MHAiM
         // Позиция курсора в X и Y
         int CursorX = Cursor.Position.X;
         int CursorY = Cursor.Position.Y;
+
+        // Инициализация координат движения мыши
+        int xOffset;
+        int yOffset;
 
         // Иницализация формы
         public Form1()
@@ -77,13 +80,11 @@ namespace MHAiM
             // Вечный цикл
             while (true)
             {
-                // Положение цветов на экране
-                //Point foundHeadColorPosition = new Point();
-                //Point foundBodyRedColorPosition = new Point();
-                //Point foundBodyBlueColorPosition = new Point();
-                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
-                Point foundBodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
-                Point foundBodyBlueColorPosition = FindColorPosition(bodyBlueColor, 860, 440, 910, 490);
+                // Поиск цветов
+                Point headColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
+                Point bodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
+                Point bodyBlueColorPosition = FindColorPosition(bodyBlueColor, 860, 440, 910, 490);
+
                 // Смена режимов
                 switch (lastPressedKey)
                 {
@@ -106,6 +107,7 @@ namespace MHAiM
                     case VirtualKeyCode.NUMPAD1:
                         UpdateSelectedModeLabel("Deagle");
                         state = 4;
+                        PerformMouseAction(headColorPosition, Point.Empty, Point.Empty);
                         break;
                     case VirtualKeyCode.NUMPAD2:
                         UpdateSelectedModeLabel("Glock");
@@ -124,102 +126,68 @@ namespace MHAiM
                         state = 8;
                         break;
                 }
+
+
+
                 // Наведение на голову
-                if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0 && state != 8)
-                {
-                    PerformMouseAction(foundHeadColorPosition);
-                }
-                // Наведение на тело
-                else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
-                {
-                    AWPtrigger();
-                }
+                //if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0 && state != 8)
+                //{
+                //    PerformMouseAction(foundHeadColorPosition);
+                //}
+                //// Наведение на тело
+                //else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
+                //{
+                //    AWPtrigger();
+                //}
 
                 // Таймер для реалистичности
-                if ((!foundHeadColorPosition.IsEmpty) && (state == 8))
-                {
-                    QuickDrawAction(foundHeadColorPosition);
-                }
-
-                if (state == 8)
-                {
-                    Thread.Sleep(0);
-                }
-                else
-                {
-                    Thread.Sleep(10);
-                }  
+                //if (state == 8)
+                //{
+                //    if (!foundHeadColorPosition.IsEmpty)
+                //    {
+                //        QuickDrawAction(foundHeadColorPosition);
+                //    }
+                //    if (!foundBodyBlueColorPosition.IsEmpty)
+                //    {
+                //        QuickDrawAction(foundBodyBlueColorPosition);
+                //    }
+                //    if (!foundBodyRedColorPosition.IsEmpty)
+                //    {
+                //        QuickDrawAction(foundBodyRedColorPosition);
+                //    }
+                //}
+                //else
+                //{
+                //    Thread.Sleep(10);
+                //}
             }
         }
         // Логика выстрелов, поведения
-        private void PerformMouseAction(Point foundColorPosition)
+        private void PerformMouseAction(Point headValue, Point blueValue, Point redValue)
         {
-            // Координаты движения мыши
-            int xOffset = foundColorPosition.X - 886;
-            int yOffset = foundColorPosition.Y - 472;
-
             // Проверка зажима
-            if (!IsHotkeyPressed(notPilote))
+            if (IsHotkeyPressed(notPilote))
             {
-                // Движение курсора
-                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-                // Проверка выбранного режима
-                switch (state)
-                {
-                    // STOP
-                    case 0:
-                        break;
-                    // AK-47
-                    case 1:
-                        rndValue = rnd.Next(600, 700);
-                        inputSimulator.Mouse.LeftButtonClick();
-                        inputSimulator.Mouse.LeftButtonClick();
-                        inputSimulator.Mouse.LeftButtonClick();
-                        Thread.Sleep(rndValue);
-                        break;
-                    // M4A1
-                    case 2:
-                        rndValue = rnd.Next(200, 220);
-                        inputSimulator.Mouse.LeftButtonClick();
-                        Thread.Sleep(rndValue);
-                        break;
-                    // AWP
-                    case 3:
-                        AWPtrigger();
-                        break;
-                    // Deagle
-                    case 4:
-                        rndValue = rnd.Next(550, 620);
-                        inputSimulator.Mouse.LeftButtonClick();
-                        Thread.Sleep(rndValue);
-                        break;
-                    // Glock
-                    case 5:
-                        rndValue = rnd.Next(5, 15);
-                        inputSimulator.Mouse.LeftButtonClick();
-                        Thread.Sleep(rndValue);
-                        break;
-                    // USP-S
-                    case 6:
-                        rndValue = rnd.Next(15, 25);
-                        inputSimulator.Mouse.LeftButtonClick();
-                        Thread.Sleep(rndValue);
-                        break;
-                    // QuickDraw
-                    //case 8:
-                    //    Point foundHeadColorPosition = FindColorPosition(headColor, 900, 480, 920, 495);
-                    //    QuickDrawAction(foundHeadColorPosition);
-                    //    break;
-                }
+                return;
             }
-            //else
-            //{
-            //    while (IsHotkeyPressed(notPilote))
-            //    {
-            //        inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset+1);
-            //        Thread.Sleep(15);
-            //    }
-            //}
+
+            Color pixelColor = GetColorPixel(CursorX, CursorY);
+
+            // Логика головы
+            if (!headValue.IsEmpty && blueValue.IsEmpty && redValue.IsEmpty)
+            {
+                // Сдвиг относительно найденной головы
+                xOffset = headValue.X - 886;
+                yOffset = headValue.Y - 472;
+
+                do
+                {
+                    // Движение мыши на голову
+                    inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+                } while (pixelColor != headColor);
+
+                inputSimulator.Mouse.LeftButtonClick();
+            }
         }
 
         // Смена надписи режима
@@ -270,24 +238,22 @@ namespace MHAiM
         // QuickDraw script
         public void QuickDrawAction(Point foundColorPosition)
         {
-            if (!foundColorPosition.IsEmpty)
+            if (!IsHotkeyPressed(notPilote))
             {
-                Color pixelColor = GetColorPixel(CursorX, CursorY);
-                Point foundHeadColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
-
-                if (!foundHeadColorPosition.IsEmpty)
+                if (!foundColorPosition.IsEmpty)
                 {
-                    // Координаты движения мыши
-                    int xOffset = foundHeadColorPosition.X - 886;
-                    int yOffset = foundHeadColorPosition.Y - 472;
+                    Color pixelColor = GetColorPixel(CursorX, CursorY);
 
-                    inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-                    if (pixelColor != headColor)
+                    if (!foundColorPosition.IsEmpty)
                     {
-                        foundHeadColorPosition = FindColorPosition(headColor, 825, 440, 960, 575);
+                        // Координаты движения мыши
+                        int xOffset = foundColorPosition.X - 886;
+                        int yOffset = foundColorPosition.Y - 472;
+
                         inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+                        Thread.Sleep(20);
+                        inputSimulator.Mouse.LeftButtonClick();
                     }
-                    inputSimulator.Mouse.LeftButtonClick();
                 }
             }
         }
@@ -295,19 +261,33 @@ namespace MHAiM
         // Триггер для AWP
         public void AWPtrigger()
         {
-            // Получение пикселя по координатам
-            Color pixelColor = GetColorPixel(CursorX, CursorY);
-            // Проверка цвета по RGB
-            if ((pixelColor.R > 180 && pixelColor.G < 10 && pixelColor.B < 10) || // Красный
-               (pixelColor.R < 10 && pixelColor.G < 10 && pixelColor.B > 180) || // Синий
-               (pixelColor.R < 10 && pixelColor.G > 180 && pixelColor.B < 10))  // Зелёный
+            while (state == 3)
             {
-                if (!IsHotkeyPressed(TriggetBtn))
+                Color pixelColor = GetColorPixel(CursorX, CursorY);
+
+                // Получение пикселя по координатам
+                if ((pixelColor == bodyBlueColor) || (pixelColor == bodyRedColor))
                 {
-                    inputSimulator.Mouse.LeftButtonClick();
-                    return;
+                    if (!IsHotkeyPressed(TriggetBtn))
+                    {
+                        inputSimulator.Mouse.LeftButtonClick();
+                    }
                 }
             }
+            
+            
+
+            // Проверка цвета по RGB
+            //if ((pixelColor.R > 180 && pixelColor.G < 10 && pixelColor.B < 10) || // Красный
+            //   (pixelColor.R < 10 && pixelColor.G < 10 && pixelColor.B > 180) || // Синий
+            //   (pixelColor.R < 10 && pixelColor.G > 180 && pixelColor.B < 10))  // Зелёный
+            //{
+            //    if (!IsHotkeyPressed(TriggetBtn))
+            //    {
+            //        inputSimulator.Mouse.LeftButtonClick();
+            //        return;
+            //    }
+            //}
         }
 
         // Функция получение цвета пикселя
