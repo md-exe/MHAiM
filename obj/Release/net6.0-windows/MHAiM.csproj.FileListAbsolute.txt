@@ -59,3 +59,4 @@ G:\Work\VS_projects\MHAiM\obj\Release\net6.0-windows\refint\MHAiM.dll
 G:\Work\VS_projects\MHAiM\obj\Release\net6.0-windows\MHAiM.pdb
 G:\Work\VS_projects\MHAiM\obj\Release\net6.0-windows\MHAiM.genruntimeconfig.cache
 G:\Work\VS_projects\MHAiM\obj\Release\net6.0-windows\ref\MHAiM.dll
+D:\VS\MHAiM\obj\Release\net6.0-windows\MHAiM.sourcelink.json

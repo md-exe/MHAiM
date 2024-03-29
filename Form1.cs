@@ -84,7 +84,7 @@ namespace MHAiM
                 // Поиск цветов
                 Point headColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
                 Point bodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
-                Point bodyBlueColorPosition = FindColorPosition(bodyBlueColor, 860, 440, 910, 490);
+                Point bodyBlueColorPosition = FindColorPosition(bodyBlueColor, 255, 115, 1535, 835);
 
                 Point rageHead = FindColorPosition(headColor, 681, 367, 1078, 603);
 
@@ -185,8 +185,9 @@ namespace MHAiM
 
                 // Движение мыши на голову
                 inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-
-                //inputSimulator.Mouse.LeftButtonClick();
+                Thread.Sleep(250);
+                inputSimulator.Mouse.LeftButtonClick();
+                
             }
         }
 
@@ -293,19 +294,28 @@ namespace MHAiM
         // Функция получение цвета пикселя
         public static Color GetColorPixel(int x, int y)
         {
-            // Цвет пикселя под курсором
-            Bitmap bmp = new Bitmap(5, 5);
-            // -1, -1 для смещения на пиксель выше, ибо прицел у AWP красный
-            Rectangle lockRectangle = new Rectangle(new Point(), bmp.Size);
-            BitmapData data = bmp.LockBits(lockRectangle, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-
-            unsafe
+            try
             {
-                int* pointer = (int*)data.Scan0;
-                int firstPixel = pointer[0];
-                int lastPixel = pointer[data.Height * (data.Width - 1) + data.Width - 1];
+                using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
+                {
+                    Rectangle lockRectangle = new Rectangle(x - 1, y - 1, 1, 1);
+                    BitmapData data = bmp.LockBits(lockRectangle,ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+
+                    unsafe
+                    {
+                        byte* pointer = (byte*)data.Scan0;
+                        byte blue = pointer[0];
+                        byte green = pointer[1];
+                        byte red = pointer[2];
+                        byte alpha = pointer[3];
+                        return Color.FromArgb(alpha, red, green, blue);
+                    }
+                }
             }
-            bmp.UnlockBits(data);
+            catch
+            {
+                return Color.Empty;
+            }
         }
 
 
