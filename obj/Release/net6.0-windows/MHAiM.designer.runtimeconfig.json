@@ -12,8 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\404-prep\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\404-prep\\.nuget\\packages"
+      "C:\\Users\\md\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\md\\.nuget\\packages"
     ],
     "configProperties": {
       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,

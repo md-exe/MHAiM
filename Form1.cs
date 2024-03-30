@@ -1,5 +1,7 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Windows.Forms.VisualStyles;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -7,86 +9,17 @@ namespace MHAiM
 {
     public partial class Form1 : Form
     {
-        // DLL позиции курсора
-        [DllImport("user32.dll")]
-        static extern bool GetCursorPos(out Point lpPoint);
-        // DLL положения клавиши
-        [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(Keys vKey);
-
-        // Инициализация имитации клавиш
-        private InputSimulator inputSimulator = new InputSimulator();
-        private VirtualKeyCode lastPressedKey = VirtualKeyCode.NONAME;
-        private KeyboardHook keyboardHook;
-
-        // Бинд зажима
-        private Keys notPilote = Keys.LButton;
-        // Бинд триггера
-        private Keys TriggetBtn = Keys.T;
-
-        // Инициализация цветов
-        private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);
-        private Color bodyRedColor = Color.FromArgb(0xFF, 0x00, 0x00);
-        private Color bodyBlueColor = Color.FromArgb(0x00, 0x00, 0xFF);
-
-        // state - выбранный режим
-        private byte state = 0;
-
-        // 0 - STOP
-        // 1 - AK-47
-        // 2 - M4A1
-        // 3 - AWP
-        // 4 - Deagle
-        // 5 - Glock
-        // 6 - USP-S
-        // 7 - Copilot
-        // 8 - QuickDraw
-
-        // Рандомайзер
-        Random rnd = new Random();
-        int rndValue;
-
-        // Позиция курсора в X и Y
-        int CursorX = Cursor.Position.X;
-        int CursorY = Cursor.Position.Y;
-
-        // Инициализация координат движения мыши
-        int xOffset;
-        int yOffset;
-
-        // Иницализация формы
-        public Form1()
-        {
-            InitializeComponent();
-            keyboardHook = new KeyboardHook();
-            keyboardHook.KeyDown += KeyboardHook_KeyDown;
-        }
-
-        // Хук клавиатуры
-        public void KeyboardHook_KeyDown(object sender, KeyEventArgs e)
-        {
-            lastPressedKey = (VirtualKeyCode)e.KeyCode;
-        }
-
-        // Загрузка формы, запуск цикла
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Thread logicThread = new Thread(MainLogic) { IsBackground = true };
-            logicThread.Start();
-        }
-
         // Логика наводки
         private void MainLogic()
         {
             // Вечный цикл
             while (true)
             {
-                // Поиск цветов
-                Point headColorPosition = FindColorPosition(headColor, 885, 465, 905, 485);
-                Point bodyRedColorPosition = FindColorPosition(bodyRedColor, 860, 440, 910, 490);
-                Point bodyBlueColorPosition = FindColorPosition(bodyBlueColor, 255, 115, 1535, 835);
+                headPos = SetPoint(headColor);
+                bluePos = SetPoint(bodyBlueColor);
+                redPos = SetPoint(bodyRedColor);
 
-                Point rageHead = FindColorPosition(headColor, 681, 367, 1078, 603);
+                rageHead = FindColorPosition(headColor, 885, 465, 905, 485);
 
                 // Смена режимов
                 switch (lastPressedKey)
@@ -110,7 +43,6 @@ namespace MHAiM
                     case VirtualKeyCode.NUMPAD1:
                         UpdateSelectedModeLabel("Deagle");
                         state = 4;
-                        PerformMouseAction(rageHead, Point.Empty, Point.Empty);
                         break;
                     case VirtualKeyCode.NUMPAD2:
                         UpdateSelectedModeLabel("Glock");
@@ -130,43 +62,12 @@ namespace MHAiM
                         break;
                 }
 
-
-
-                // Наведение на голову
-                //if (!foundHeadColorPosition.IsEmpty && state != 3 && state != 0 && state != 8)
-                //{
-                //    PerformMouseAction(foundHeadColorPosition);
-                //}
-                //// Наведение на тело
-                //else if ((!foundBodyRedColorPosition.IsEmpty || !foundBodyBlueColorPosition.IsEmpty) && (state == 3))
-                //{
-                //    AWPtrigger();
-                //}
-
-                // Таймер для реалистичности
-                //if (state == 8)
-                //{
-                //    if (!foundHeadColorPosition.IsEmpty)
-                //    {
-                //        QuickDrawAction(foundHeadColorPosition);
-                //    }
-                //    if (!foundBodyBlueColorPosition.IsEmpty)
-                //    {
-                //        QuickDrawAction(foundBodyBlueColorPosition);
-                //    }
-                //    if (!foundBodyRedColorPosition.IsEmpty)
-                //    {
-                //        QuickDrawAction(foundBodyRedColorPosition);
-                //    }
-                //}
-                //else
-                //{
-                //    Thread.Sleep(10);
-                //}
+                PerformMouseAction(headPos, bluePos, redPos, rageHead);
             }
         }
+
         // Логика выстрелов, поведения
-        private void PerformMouseAction(Point headValue, Point blueValue, Point redValue)
+        private void PerformMouseAction(Point headValue, Point blueValue, Point redValue, Point extraValue)
         {
             // Проверка зажима
             if (IsHotkeyPressed(notPilote))
@@ -174,23 +75,254 @@ namespace MHAiM
                 return;
             }
 
-            Color pixelColor = GetColorPixel(CursorX, CursorY);
-
-            // Логика головы
-            if (!headValue.IsEmpty && blueValue.IsEmpty && redValue.IsEmpty)
+            // Проверка режима
+            switch (state)
             {
-                // Сдвиг относительно найденной головы
-                xOffset = headValue.X - 886; // 886
-                yOffset = headValue.Y - 472; // 472
-
-                // Движение мыши на голову
-                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-                Thread.Sleep(250);
-                inputSimulator.Mouse.LeftButtonClick();
-                
+                // STOP
+                case 0:
+                    break;
+                // AK-47
+                case 1:
+                    // Поиск пикселя
+                    if (SetPoint(bodyBlueColor).IsEmpty)
+                    {
+                        SetPoint(bodyRedColor);
+                        akLogic(redPos);
+                    }
+                    else
+                    {
+                        SetPoint(bodyBlueColor);
+                        akLogic(bluePos);
+                    }
+                    break;
+                // M4A1
+                case 2:
+                    if (SetPoint(bodyBlueColor).IsEmpty)
+                    {
+                        SetPoint(bodyRedColor);
+                        pixelColor = GetColorPixel(CursorX, CursorY);
+                        m4Logic(redPos);
+                    }
+                    else
+                    {
+                        SetPoint(bodyBlueColor);
+                        pixelColor = GetColorPixel(CursorX, CursorY);
+                        m4Logic(bluePos);
+                    }
+                    break;
+                // AWP
+                case 3:
+                    pixelColor = GetColorPixel(CursorX, CursorY);
+                    awpLogic();
+                    break;
+                // Deagle
+                case 4:
+                    break;
+                // Glock
+                case 5:
+                    break;
+                // USP-S
+                case 6:
+                    break;
+                // Copilot
+                case 7:
+                    copiloteAction(headPos, false);
+                    break;
+                // QuickDraw
+                case 8:
+                    copiloteAction(rageHead, true);
+                    break;
             }
         }
 
+        // Логика поведения AK-47
+        private void akLogic(Point teamPos)
+        {
+            // Проверка пустоты пикселя
+            if (!teamPos.IsEmpty)
+            {
+
+                // Оффсеты движения
+                xOffset = teamPos.X - 890;
+                yOffset = teamPos.Y - 475;
+
+                // Движение мыши
+                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+
+                // Рандом
+                rndValue = rnd.Next(92, 115);
+                stopValue = rnd.Next(480, 500);
+
+                inputSimulator.Mouse.LeftButtonClick();
+                Thread.Sleep(rndValue);
+                inputSimulator.Mouse.MoveMouseBy(0, 3);
+                inputSimulator.Mouse.LeftButtonClick();
+                Thread.Sleep(rndValue);
+                inputSimulator.Mouse.MoveMouseBy(0, 5);
+                inputSimulator.Mouse.LeftButtonClick();
+                inputSimulator.Mouse.MoveMouseBy(0, 7);
+                Thread.Sleep(stopValue);
+            }
+        }
+
+        // Логика поведения M4A1
+        private void m4Logic(Point teamPos)
+        {
+            // Проверка пустоты пикселя
+            if (!teamPos.IsEmpty)
+            {
+                // Оффсеты движения
+                xOffset = teamPos.X - 890;
+                yOffset = teamPos.Y - 475;
+
+                // Движение мыши
+                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+                Thread.Sleep(7);
+
+                // Рандом
+                rndValue = rnd.Next(95, 100);
+                stopValue = rnd.Next(380, 396);
+
+                inputSimulator.Mouse.LeftButtonDown();
+                Thread.Sleep(rndValue);
+                if (pixelColor != bodyRedColor || pixelColor != bodyRedColor)
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        inputSimulator.Mouse.MoveMouseBy(0, i);
+                        Thread.Sleep(3);
+                    }
+                }
+                inputSimulator.Mouse.LeftButtonUp();
+                Thread.Sleep(stopValue);    
+            }
+        }
+
+        private void copiloteAction(Point headValue, bool rage)
+        {
+            if (!headValue.IsEmpty)
+            {
+                xOffset = headValue.X - 890; 
+                yOffset = headValue.Y - 475;
+
+                // Движение мыши на голову
+                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+
+                if (rage == true)
+                {
+                    inputSimulator.Mouse.LeftButtonClick();
+                    Thread.Sleep(10);
+                }
+                else
+                {
+                    Thread.Sleep(20);
+                }
+            }
+        }
+
+        // Триггер для AWP
+        public void awpLogic()
+        {
+            Color newColor = GetColorPixel(CursorX, CursorY);
+            Console.WriteLine(CursorX);
+
+            // Проверка пикселя на соответствие цвету врага
+            //if ((newColor.R > 180 && newColor.G < 10 && newColor.B < 10) ||
+            //    (newColor.R < 10 && newColor.G < 10 && newColor.B > 180) ||
+            //    (newColor.R < 10 && newColor.G > 180 && newColor.B < 10))
+            //{
+            //    inputSimulator.Mouse.LeftButtonClick();
+            //    return;
+            //}
+        }
+
+        #region Инициализации
+        // DLL позиции курсора
+        [DllImport("user32.dll")]
+        static extern bool GetCursorPos(out Point lpPoint);
+        // DLL положения клавиши
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(Keys vKey);
+
+        // Инициализация имитации клавиш
+        private InputSimulator inputSimulator = new InputSimulator();
+        private VirtualKeyCode lastPressedKey = VirtualKeyCode.NONAME;
+        private KeyboardHook keyboardHook;
+
+        // Рандомайзер
+        Random rnd = new Random();
+        int rndValue;
+        int stopValue;
+
+        // Инициализация координат движения мыши
+        int xOffset;
+        int yOffset;
+
+        // Позиция курсора в X и Y
+        int CursorX = Cursor.Position.X;
+        int CursorY = Cursor.Position.Y;
+
+        // Иницилизация поинтов
+        Point headPos = new Point();
+        Point bluePos = new Point();
+        Point redPos = new Point();
+        Point rageHead = new Point();
+
+        // Иницализация формы
+        public Form1()
+        {
+            InitializeComponent();
+            keyboardHook = new KeyboardHook();
+            keyboardHook.KeyDown += KeyboardHook_KeyDown;
+        }
+
+        // Хук клавиатуры
+        public void KeyboardHook_KeyDown(object sender, KeyEventArgs e)
+        {
+            lastPressedKey = (VirtualKeyCode)e.KeyCode;
+        }
+
+        // Загрузка формы, запуск цикла
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Thread logicThread = new Thread(MainLogic) { IsBackground = true };
+            logicThread.Start();
+        }
+
+        #endregion
+
+        #region Бинды
+        // Бинд зажима
+        private Keys notPilote = Keys.LButton;
+        // Бинд триггера
+        private Keys TriggetBtn = Keys.T;
+        #endregion
+
+        #region Цвета
+        // Инициализация цветов
+        private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);
+        private Color bodyRedColor = Color.FromArgb(0xFF, 0x00, 0x00);
+        private Color bodyBlueColor = Color.FromArgb(0x00, 0x00, 0xFF);
+
+        private Color pixelColor;
+        #endregion
+
+        #region Состояния
+        // state - выбранный режим
+        private byte state = 0;
+
+        // 0 - STOP
+        // 1 - AK-47
+        // 2 - M4A1
+        // 3 - AWP
+        // 4 - Deagle
+        // 5 - Glock
+        // 6 - USP-S
+        // 7 - Copilot
+        // 8 - QuickDraw
+        #endregion
+
+        #region Утилиты
         // Смена надписи режима
         private void UpdateSelectedModeLabel(string state)
         {
@@ -204,8 +336,63 @@ namespace MHAiM
             }
         }
 
+        // Функция получения поинта
+        public static Point SetPoint(Color gotColor)
+        {
+            Point getPoint = FindColorPosition(gotColor, 885, 465, 905, 485);
+            return getPoint;
+        }
+
+        // Функция получение цвета пикселя
+        public static Color GetColorPixel(int x, int y)
+        {
+            try
+            {
+                using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
+                {
+                    // Минус для прицела AWP
+                    Rectangle lockRectangle = new Rectangle(x - 1, y - 1, 1, 1);
+                    BitmapData data = bmp.LockBits(lockRectangle, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+
+                    unsafe
+                    {
+                        byte* pointer = (byte*)data.Scan0;
+                        byte blue = pointer[0];
+                        byte green = pointer[1];
+                        byte red = pointer[2];
+
+                        return Color.FromArgb(red, green, blue);
+                    }
+                }
+            }
+            catch
+            {
+                return Color.Empty;
+            }
+        }
+
+
+        // Проверка схожести цветов
+        private static bool AreColorsSimilar(Color color1, Color color2, int maxColorDifference)
+        {
+            int redDifference = Math.Abs(color1.R - color2.R);
+            int greenDifference = Math.Abs(color1.G - color2.G);
+            int blueDifference = Math.Abs(color1.B - color2.B);
+            return redDifference <= maxColorDifference && greenDifference <= maxColorDifference && blueDifference <= maxColorDifference;
+        }
+
+        // Проверка ЗАЖАТИЯ клавиши (для зажима)
+        private static bool IsHotkeyPressed(Keys vKey)
+        {
+            // Переменная состояния клавиши
+            short keyState = GetAsyncKeyState(vKey);
+            
+            // Возврат, что клавиша зажата
+            return (keyState < 0);      
+        }
+
         // Поиск координат цвета
-        private Point FindColorPosition(Color targetColor, int startX, int startY, int endX, int endY)
+        public static Point FindColorPosition(Color targetColor, int startX, int startY, int endX, int endY)
         {
             // try для обработки исключений
             try
@@ -235,105 +422,9 @@ namespace MHAiM
                 return Point.Empty;
             }
         }
+        #endregion
 
-        // QuickDraw script
-        public void QuickDrawAction(Point foundColorPosition)
-        {
-            if (!IsHotkeyPressed(notPilote))
-            {
-                if (!foundColorPosition.IsEmpty)
-                {
-                    Color pixelColor = GetColorPixel(CursorX, CursorY);
-
-                    if (!foundColorPosition.IsEmpty)
-                    {
-                        // Координаты движения мыши
-                        int xOffset = foundColorPosition.X - 886;
-                        int yOffset = foundColorPosition.Y - 472;
-
-                        inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-                        Thread.Sleep(20);
-                        inputSimulator.Mouse.LeftButtonClick();
-                    }
-                }
-            }
-        }
-
-        // Триггер для AWP
-        public void AWPtrigger()
-        {
-            while (state == 3)
-            {
-                Color pixelColor = GetColorPixel(CursorX, CursorY);
-
-                // Получение пикселя по координатам
-                if ((pixelColor == bodyBlueColor) || (pixelColor == bodyRedColor))
-                {
-                    if (!IsHotkeyPressed(TriggetBtn))
-                    {
-                        inputSimulator.Mouse.LeftButtonClick();
-                    }
-                }
-            }
-            
-            
-
-            // Проверка цвета по RGB
-            //if ((pixelColor.R > 180 && pixelColor.G < 10 && pixelColor.B < 10) || // Красный
-            //   (pixelColor.R < 10 && pixelColor.G < 10 && pixelColor.B > 180) || // Синий
-            //   (pixelColor.R < 10 && pixelColor.G > 180 && pixelColor.B < 10))  // Зелёный
-            //{
-            //    if (!IsHotkeyPressed(TriggetBtn))
-            //    {
-            //        inputSimulator.Mouse.LeftButtonClick();
-            //        return;
-            //    }
-            //}
-        }
-
-        // Функция получение цвета пикселя
-        public static Color GetColorPixel(int x, int y)
-        {
-            try
-            {
-                using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
-                {
-                    Rectangle lockRectangle = new Rectangle(x - 1, y - 1, 1, 1);
-                    BitmapData data = bmp.LockBits(lockRectangle,ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-
-                    unsafe
-                    {
-                        byte* pointer = (byte*)data.Scan0;
-                        byte blue = pointer[0];
-                        byte green = pointer[1];
-                        byte red = pointer[2];
-                        byte alpha = pointer[3];
-                        return Color.FromArgb(alpha, red, green, blue);
-                    }
-                }
-            }
-            catch
-            {
-                return Color.Empty;
-            }
-        }
-
-
-        // Проверка схожести цветов
-        private static bool AreColorsSimilar(Color color1, Color color2, int maxColorDifference)
-        {
-            int redDifference = Math.Abs(color1.R - color2.R);
-            int greenDifference = Math.Abs(color1.G - color2.G);
-            int blueDifference = Math.Abs(color1.B - color2.B);
-            return redDifference <= maxColorDifference && greenDifference <= maxColorDifference && blueDifference <= maxColorDifference;
-        }
-
-        // Проверка ЗАЖАТИЯ клавиши (для зажима)
-        private static bool IsHotkeyPressed(Keys vKey)
-        {
-            return (GetAsyncKeyState(vKey) < 0);
-        }
-
+        #region Визуальные кнопки
         // Кнопка AK-47
         private void AKButton_Click(object sender, EventArgs e)
         {
@@ -375,5 +466,6 @@ namespace MHAiM
             UpdateSelectedModeLabel("USP-S");
             state = 6;
         }
+        #endregion
     }
 }
