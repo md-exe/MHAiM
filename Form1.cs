@@ -81,39 +81,19 @@ namespace MHAiM
                 // STOP
                 case 0:
                     break;
-                // AK-47
+                // AK-47 - общая логика
                 case 1:
-                    // Поиск пикселя
-                    if (SetPoint(bodyBlueColor).IsEmpty)
-                    {
-                        SetPoint(bodyRedColor);
-                        akLogic(redPos);
-                    }
-                    else
-                    {
-                        SetPoint(bodyBlueColor);
-                        akLogic(bluePos);
-                    }
-                    break;
-                // M4A1
+                // M4A1 - общиая логика
                 case 2:
-                    if (SetPoint(bodyBlueColor).IsEmpty)
-                    {
-                        SetPoint(bodyRedColor);
-                        pixelColor = GetColorPixel(CursorX, CursorY);
-                        m4Logic(redPos);
-                    }
-                    else
-                    {
-                        SetPoint(bodyBlueColor);
-                        pixelColor = GetColorPixel(CursorX, CursorY);
-                        m4Logic(bluePos);
-                    }
+                    // Общая логика для AK-47 и M4A1
+                    Point targetPos = SetPoint(state == 1 ? bodyRedColor : bodyBlueColor);
+                    pixelColor = GetColorPixel(CursorX, CursorY);
+                    rifleLogic(targetPos, state);
                     break;
                 // AWP
                 case 3:
-                    pixelColor = GetColorPixel(CursorX, CursorY);
-                    awpLogic();
+                    pixelColor = GetColorPixel(CursorX-3, CursorY-3);
+                    awpLogic(bluePos, redPos, headPos);
                     break;
                 // Deagle
                 case 4:
@@ -124,77 +104,72 @@ namespace MHAiM
                 // USP-S
                 case 6:
                     break;
-                // Copilot
+                // Copilot - общая логика
                 case 7:
-                    copiloteAction(headPos, false);
-                    break;
-                // QuickDraw
+                // QuickDraw - общая логика
                 case 8:
-                    copiloteAction(rageHead, true);
+                    copiloteAction(state == 8 ? extraValue : headValue, state == 8);
                     break;
             }
         }
 
-        // Логика поведения AK-47
-        private void akLogic(Point teamPos)
+        // Логика винтовок
+        private void rifleLogic(Point teamPos, byte type)
         {
-            // Проверка пустоты пикселя
+            // Если пиксель найден
             if (!teamPos.IsEmpty)
             {
-
-                // Оффсеты движения
-                xOffset = teamPos.X - 890;
-                yOffset = teamPos.Y - 475;
-
-                // Движение мыши
-                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-
-                // Рандом
-                rndValue = rnd.Next(92, 115);
-                stopValue = rnd.Next(480, 500);
-
-                inputSimulator.Mouse.LeftButtonClick();
-                Thread.Sleep(rndValue);
-                inputSimulator.Mouse.MoveMouseBy(0, 3);
-                inputSimulator.Mouse.LeftButtonClick();
-                Thread.Sleep(rndValue);
-                inputSimulator.Mouse.MoveMouseBy(0, 5);
-                inputSimulator.Mouse.LeftButtonClick();
-                inputSimulator.Mouse.MoveMouseBy(0, 7);
-                Thread.Sleep(stopValue);
-            }
-        }
-
-        // Логика поведения M4A1
-        private void m4Logic(Point teamPos)
-        {
-            // Проверка пустоты пикселя
-            if (!teamPos.IsEmpty)
-            {
-                // Оффсеты движения
-                xOffset = teamPos.X - 890;
-                yOffset = teamPos.Y - 475;
-
-                // Движение мыши
-                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
-                Thread.Sleep(7);
-
-                // Рандом
-                rndValue = rnd.Next(95, 100);
-                stopValue = rnd.Next(380, 396);
-
-                inputSimulator.Mouse.LeftButtonDown();
-                Thread.Sleep(rndValue);
-                if (pixelColor != bodyRedColor || pixelColor != bodyRedColor)
+                // Логика AK-47
+                if (type == 1)
                 {
-                    for (int i = 0; i < 7; i++)
-                    {
-                        inputSimulator.Mouse.MoveMouseBy(0, i);
-                        Thread.Sleep(3);
-                    }
+                    // Оффсеты движения
+                    xOffset = teamPos.X - 890;
+                    yOffset = teamPos.Y - 475;
+
+                    // Движение мыши
+                    inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+
+                    // Рандом
+                    rndValue = rnd.Next(92, 115);
+                    stopValue = rnd.Next(480, 500);
+
+                    inputSimulator.Mouse.LeftButtonClick();
+                    Thread.Sleep(rndValue);
+                    inputSimulator.Mouse.MoveMouseBy(0, 3);
+                    inputSimulator.Mouse.LeftButtonClick();
+                    Thread.Sleep(rndValue);
+                    inputSimulator.Mouse.MoveMouseBy(0, 5);
+                    inputSimulator.Mouse.LeftButtonClick();
+                    inputSimulator.Mouse.MoveMouseBy(0, 7);
+                    Thread.Sleep(stopValue);
                 }
-                inputSimulator.Mouse.LeftButtonUp();
-                Thread.Sleep(stopValue);    
+                else if (type == 2)
+                {
+                    // Оффсеты движения
+                    xOffset = teamPos.X - 890;
+                    yOffset = teamPos.Y - 475;
+
+                    // Движение мыши
+                    inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+                    Thread.Sleep(7);
+
+                    // Рандом
+                    rndValue = rnd.Next(95, 100);
+                    stopValue = rnd.Next(380, 396);
+
+                    inputSimulator.Mouse.LeftButtonDown();
+                    Thread.Sleep(rndValue);
+                    if (pixelColor != bodyRedColor || pixelColor != bodyRedColor)
+                    {
+                        for (int i = 0; i < 7; i++)
+                        {
+                            inputSimulator.Mouse.MoveMouseBy(0, i);
+                            Thread.Sleep(3);
+                        }
+                    }
+                    inputSimulator.Mouse.LeftButtonUp();
+                    Thread.Sleep(stopValue);
+                }
             }
         }
 
@@ -211,29 +186,22 @@ namespace MHAiM
                 if (rage == true)
                 {
                     inputSimulator.Mouse.LeftButtonClick();
-                    Thread.Sleep(10);
+                    Thread.Sleep(30);
                 }
                 else
                 {
-                    Thread.Sleep(20);
+                    Thread.Sleep(50);
                 }
             }
         }
 
         // Триггер для AWP
-        public void awpLogic()
+        public void awpLogic(Point blueValue, Point redValue, Point headValue)
         {
-            Color newColor = GetColorPixel(CursorX, CursorY);
-            Console.WriteLine(CursorX);
-
-            // Проверка пикселя на соответствие цвету врага
-            //if ((newColor.R > 180 && newColor.G < 10 && newColor.B < 10) ||
-            //    (newColor.R < 10 && newColor.G < 10 && newColor.B > 180) ||
-            //    (newColor.R < 10 && newColor.G > 180 && newColor.B < 10))
-            //{
-            //    inputSimulator.Mouse.LeftButtonClick();
-            //    return;
-            //}
+            if (!blueValue.IsEmpty || !redValue.IsEmpty || !headValue.IsEmpty)
+            {
+                inputSimulator.Mouse.LeftButtonClick();
+            }
         }
 
         #region Инициализации
@@ -346,29 +314,34 @@ namespace MHAiM
         // Функция получение цвета пикселя
         public static Color GetColorPixel(int x, int y)
         {
-            try
+            Color resultColor = Color.Empty;
+            Task.Run(() =>
             {
-                using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
+                try
                 {
-                    // Минус для прицела AWP
-                    Rectangle lockRectangle = new Rectangle(x - 1, y - 1, 1, 1);
-                    BitmapData data = bmp.LockBits(lockRectangle, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-
-                    unsafe
+                    using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
                     {
-                        byte* pointer = (byte*)data.Scan0;
-                        byte blue = pointer[0];
-                        byte green = pointer[1];
-                        byte red = pointer[2];
+                        // Минус для прицела AWP
+                        Rectangle lockRectangle = new Rectangle(x - 1, y - 1, 1, 1);
+                        BitmapData data = bmp.LockBits(lockRectangle, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
 
-                        return Color.FromArgb(red, green, blue);
+                        unsafe
+                        {
+                            byte* pointer = (byte*)data.Scan0;
+                            byte blue = pointer[0];
+                            byte green = pointer[1];
+                            byte red = pointer[2];
+
+                            return Color.FromArgb(red, green, blue);
+                        }
                     }
                 }
-            }
-            catch
-            {
-                return Color.Empty;
-            }
+                catch
+                {
+                    return Color.Empty;
+                }
+            }).Wait();
+            return resultColor;
         }
 
 
