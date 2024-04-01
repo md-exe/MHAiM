@@ -20,6 +20,8 @@ namespace MHAiM
                 redPos = SetPoint(bodyRedColor);
 
                 rageHead = FindColorPosition(headColor, 885, 465, 905, 485);
+                // Дефолтное 885, 465, 905, 485
+                //awpPos = FindColorPosition();
 
                 // Смена режимов
                 switch (lastPressedKey)
@@ -200,7 +202,11 @@ namespace MHAiM
         {
             if (!blueValue.IsEmpty || !redValue.IsEmpty || !headValue.IsEmpty)
             {
-                inputSimulator.Mouse.LeftButtonClick();
+                // Тест проверки пикселя под курсором
+                if (pixelColor == bodyRedColor || pixelColor == bodyBlueColor || pixelColor == headColor)
+                {
+                    inputSimulator.Mouse.LeftButtonClick();
+                }
             }
         }
 
@@ -231,10 +237,11 @@ namespace MHAiM
         int CursorY = Cursor.Position.Y;
 
         // Иницилизация поинтов
-        Point headPos = new Point();
-        Point bluePos = new Point();
-        Point redPos = new Point();
-        Point rageHead = new Point();
+        Point headPos = new Point(); // Голова
+        Point bluePos = new Point(); // Тело КТ
+        Point redPos = new Point(); // Тело Т
+        Point rageHead = new Point(); // Голова в большем радиусе
+        Point awpPos = new Point();
 
         // Иницализация формы
         public Form1()

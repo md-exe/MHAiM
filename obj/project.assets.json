@@ -68,19 +68,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\md\\.nuget\\packages\\": {}
+    "C:\\Users\\PublicUser404\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS\\MHAiM\\MHAiM.csproj",
+      "projectUniqueName": "E:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
       "projectName": "MHAiM",
-      "projectPath": "D:\\VS\\MHAiM\\MHAiM.csproj",
-      "packagesPath": "C:\\Users\\md\\.nuget\\packages\\",
-      "outputPath": "D:\\VS\\MHAiM\\obj\\",
+      "projectPath": "E:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
+      "packagesPath": "C:\\Users\\PublicUser404\\.nuget\\packages\\",
+      "outputPath": "E:\\Work\\VS_projects\\MHAiM\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\md\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PublicUser404\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
