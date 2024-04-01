@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MHAiM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c3578c00591774fa4e2081ba44ea93697dfe178")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2530c6f675122a794a1c4c7c1c0091459dbb8af")]
 [assembly: System.Reflection.AssemblyProductAttribute("MHAiM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MHAiM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

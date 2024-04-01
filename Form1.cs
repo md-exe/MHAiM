@@ -1,7 +1,5 @@
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Windows.Forms.VisualStyles;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -9,19 +7,32 @@ namespace MHAiM
 {
     public partial class Form1 : Form
     {
+
+        // Для коммита 11:53 01.04.2024:
+        // Изменил логику AWP, сделав сверку конкретного пикселя под курсором;
+        // Добавил функцию GetColorAt() - поиск цвета пикселя, аналогично GetColorPixel(), но без LockBits;
+        // Убрал CursorX, CursorY - использовав GetCursorPos(out cursorPos), дальнейшее использование через cursorPos.X, cursorPos.Y;
+        // Добавил комментариев;
+
+        // Задачи:
+        // Сделать меньше радиус у всех дефолтных поинтов, оставив (885, 465, 905, 485) для rage мода;
+        // Попытаться совместить GetColorPixel() и GetColorAt() или добавить логику GetColorAt() внутрь awpLogic();
+        // Сделать Bhop: возможно, через просто прыжки, возможно, добавив стрейфы;
+
         // Логика наводки
         private void MainLogic()
         {
             // Вечный цикл
             while (true)
             {
+                // Поиск пикселя головы (зелёный)
                 headPos = SetPoint(headColor);
+                // Поиск пикселя тела КТ (синий)
                 bluePos = SetPoint(bodyBlueColor);
+                // Поиск пикселя тела Т (красный)
                 redPos = SetPoint(bodyRedColor);
-
+                // Поиск пикселя головы в rage моде
                 rageHead = FindColorPosition(headColor, 885, 465, 905, 485);
-                // Дефолтное 885, 465, 905, 485
-                //awpPos = FindColorPosition();
 
                 // Смена режимов
                 switch (lastPressedKey)
@@ -77,6 +88,9 @@ namespace MHAiM
                 return;
             }
 
+            // Получение кординат курсора
+            GetCursorPos(out cursorPos);
+
             // Проверка режима
             switch (state)
             {
@@ -89,13 +103,15 @@ namespace MHAiM
                 case 2:
                     // Общая логика для AK-47 и M4A1
                     Point targetPos = SetPoint(state == 1 ? bodyRedColor : bodyBlueColor);
-                    pixelColor = GetColorPixel(CursorX, CursorY);
+                    
+                    pixelColor = GetColorPixel(cursorPos.X, cursorPos.Y);
                     rifleLogic(targetPos, state);
                     break;
                 // AWP
                 case 3:
-                    pixelColor = GetColorPixel(CursorX-3, CursorY-3);
-                    awpLogic(bluePos, redPos, headPos);
+                    //pixelColor = GetColorPixel(cursorPos.X - 3, cursorPos.Y - 3);
+                    //awpLogic(bluePos, redPos, headPos);
+                    awpLogic();
                     break;
                 // Deagle
                 case 4:
@@ -115,7 +131,7 @@ namespace MHAiM
             }
         }
 
-        // Логика винтовок
+        // Логика винтовок - AK-47 и M4A1
         private void rifleLogic(Point teamPos, byte type)
         {
             // Если пиксель найден
@@ -135,6 +151,7 @@ namespace MHAiM
                     rndValue = rnd.Next(92, 115);
                     stopValue = rnd.Next(480, 500);
 
+                    // Поведение выстрелов
                     inputSimulator.Mouse.LeftButtonClick();
                     Thread.Sleep(rndValue);
                     inputSimulator.Mouse.MoveMouseBy(0, 3);
@@ -145,6 +162,7 @@ namespace MHAiM
                     inputSimulator.Mouse.MoveMouseBy(0, 7);
                     Thread.Sleep(stopValue);
                 }
+                // Логика M4A1
                 else if (type == 2)
                 {
                     // Оффсеты движения
@@ -159,10 +177,12 @@ namespace MHAiM
                     rndValue = rnd.Next(95, 100);
                     stopValue = rnd.Next(380, 396);
 
+                    // Поведение выстрелов
                     inputSimulator.Mouse.LeftButtonDown();
                     Thread.Sleep(rndValue);
                     if (pixelColor != bodyRedColor || pixelColor != bodyRedColor)
                     {
+                        // Попытка погашения отдачи
                         for (int i = 0; i < 7; i++)
                         {
                             inputSimulator.Mouse.MoveMouseBy(0, i);
@@ -175,38 +195,48 @@ namespace MHAiM
             }
         }
 
+        // Автопилот - Copilot и QuickDraw
         private void copiloteAction(Point headValue, bool rage)
         {
+            // Если цвет головы найден
             if (!headValue.IsEmpty)
             {
+                // Оффсеты движения
                 xOffset = headValue.X - 890; 
                 yOffset = headValue.Y - 475;
 
                 // Движение мыши на голову
                 inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
 
+                // Проверка rage мода (QuickDraw)
                 if (rage == true)
                 {
                     inputSimulator.Mouse.LeftButtonClick();
+                    // Короткое ожидание для rage
                     Thread.Sleep(30);
                 }
                 else
                 {
+                    // Более длительное для Copilot
                     Thread.Sleep(50);
                 }
             }
         }
 
-        // Триггер для AWP
-        public void awpLogic(Point blueValue, Point redValue, Point headValue)
+        // Триггер стрельбы по наличию пикселя - AWP 
+        public void awpLogic()
         {
-            if (!blueValue.IsEmpty || !redValue.IsEmpty || !headValue.IsEmpty)
+            // Получение цвета пикселя под курсором
+            Color pixelColor = GetColorAt(cursorPos.X, cursorPos.Y);
+
+            // Проверка соответствия цветов
+            if ((pixelColor.R > 180 && pixelColor.G < 20 && pixelColor.B < 20) || // Красный
+               (pixelColor.R < 20 && pixelColor.G > 180 && pixelColor.B < 20) || // Зелёный
+               (pixelColor.R < 20 && pixelColor.G < 20 && pixelColor.B > 180))  // Синий
             {
-                // Тест проверки пикселя под курсором
-                if (pixelColor == bodyRedColor || pixelColor == bodyBlueColor || pixelColor == headColor)
-                {
-                    inputSimulator.Mouse.LeftButtonClick();
-                }
+                inputSimulator.Mouse.LeftButtonClick();
+                Thread.Sleep(70); // Под вопросом
+                return;
             }
         }
 
@@ -218,14 +248,16 @@ namespace MHAiM
         [DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(Keys vKey);
 
-        // Инициализация имитации клавиш
+        // Инициализация имитации нажатия клавиш
         private InputSimulator inputSimulator = new InputSimulator();
         private VirtualKeyCode lastPressedKey = VirtualKeyCode.NONAME;
         private KeyboardHook keyboardHook;
 
-        // Рандомайзер
+        // Инициализация рандомайзера
         Random rnd = new Random();
+        // Переменная ожидания между выстрелами
         int rndValue;
+        // Переменная ожидания после очереди
         int stopValue;
 
         // Инициализация координат движения мыши
@@ -233,15 +265,17 @@ namespace MHAiM
         int yOffset;
 
         // Позиция курсора в X и Y
-        int CursorX = Cursor.Position.X;
-        int CursorY = Cursor.Position.Y;
+        //int CursorX = Cursor.Position.X;
+        //int CursorY = Cursor.Position.Y;
+        
+        // Позиция курсора по cursorPos.X и cursorPos.Y
+        Point cursorPos;
 
         // Иницилизация поинтов
-        Point headPos = new Point(); // Голова
-        Point bluePos = new Point(); // Тело КТ
-        Point redPos = new Point(); // Тело Т
+        Point headPos = new Point();     // Голова
+        Point bluePos = new Point();    // Тело КТ
+        Point redPos = new Point();    // Тело Т
         Point rageHead = new Point(); // Голова в большем радиусе
-        Point awpPos = new Point();
 
         // Иницализация формы
         public Form1()
@@ -275,11 +309,11 @@ namespace MHAiM
 
         #region Цвета
         // Инициализация цветов
-        private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);
-        private Color bodyRedColor = Color.FromArgb(0xFF, 0x00, 0x00);
-        private Color bodyBlueColor = Color.FromArgb(0x00, 0x00, 0xFF);
+        private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);       // Зелёный
+        private Color bodyRedColor = Color.FromArgb(0xFF, 0x00, 0x00);   // Красный
+        private Color bodyBlueColor = Color.FromArgb(0x00, 0x00, 0xFF); // Синий
 
-        private Color pixelColor;
+        private Color pixelColor; // Инициализация пикселя под курсором
         #endregion
 
         #region Состояния
@@ -351,6 +385,15 @@ namespace MHAiM
             return resultColor;
         }
 
+        // Проверка пикселя для AWP
+        public static Color GetColorAt(int x, int y)
+        {
+            Bitmap bmp = new Bitmap(1, 1);
+            Rectangle bounds = new Rectangle(x - 1, y - 1, 1, 1);
+            using (Graphics g = Graphics.FromImage(bmp))
+                g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
+            return bmp.GetPixel(0, 0);
+        }
 
         // Проверка схожести цветов
         private static bool AreColorsSimilar(Color color1, Color color2, int maxColorDifference)
@@ -404,7 +447,7 @@ namespace MHAiM
         }
         #endregion
 
-        #region Визуальные кнопки
+        #region Действия контролов
         // Кнопка AK-47
         private void AKButton_Click(object sender, EventArgs e)
         {
