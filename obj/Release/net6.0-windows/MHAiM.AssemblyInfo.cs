@@ -14,15 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MHAiM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2530c6f675122a794a1c4c7c1c0091459dbb8af")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c3578c00591774fa4e2081ba44ea93697dfe178")]
->>>>>>> f2530c6 (awp test fix)
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2530c6f675122a794a1c4c7c1c0091459dbb8af")]
->>>>>>> 7c7a2e3 (finally awp fix, optimization, comments)
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d731f31d432389194d4278d4de5d58afcb2cb4c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("MHAiM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MHAiM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
