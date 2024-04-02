@@ -95,15 +95,31 @@ namespace MHAiM
                 // STOP
                 case 0:
                     break;
-                // AK-47 - общая логика
+                // AK-47
                 case 1:
-                // M4A1 - общиая логика
+                    if (SetPoint(bodyBlueColor).IsEmpty)
+                    {
+                        SetPoint(bodyRedColor);
+                        rifleLogic(redPos, state);
+                    }
+                    else
+                    {
+                        SetPoint(bodyBlueColor);
+                        rifleLogic(bluePos, state);
+                    }
+                    break;
+                // M4A1
                 case 2:
-                    // Общая логика для AK-47 и M4A1
-                    Point targetPos = SetPoint(state == 1 ? bodyRedColor : bodyBlueColor);
-                    
-                    pixelColor = GetColorPixel(cursorPos.X, cursorPos.Y);
-                    rifleLogic(targetPos, state);
+                    if (SetPoint(bodyBlueColor).IsEmpty)
+                    {
+                        SetPoint(bodyRedColor);
+                        rifleLogic(redPos, state);
+                    }
+                    else
+                    {
+                        SetPoint(bodyBlueColor);
+                        rifleLogic(bluePos, state);
+                    }
                     break;
                 // AWP
                 case 3:
@@ -232,23 +248,9 @@ namespace MHAiM
                (pixelColor.R < 20 && pixelColor.G > 180 && pixelColor.B < 20) || // Зелёный
                (pixelColor.R < 20 && pixelColor.G < 20 && pixelColor.B > 180))  // Синий
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
                 inputSimulator.Mouse.LeftButtonClick();
                 Thread.Sleep(70); // Под вопросом
                 return;
-=======
-                // Тест проверки пикселя под курсором
-                if (pixelColor == bodyRedColor || pixelColor == bodyBlueColor || pixelColor == headColor)
-                {
-                    inputSimulator.Mouse.LeftButtonClick();
-                }
->>>>>>> f2530c6 (awp test fix)
-=======
-                inputSimulator.Mouse.LeftButtonClick();
-                Thread.Sleep(70); // Под вопросом
-                return;
->>>>>>> 7c7a2e3 (finally awp fix, optimization, comments)
             }
         }
 
@@ -284,25 +286,10 @@ namespace MHAiM
         Point cursorPos;
 
         // Иницилизация поинтов
-<<<<<<< HEAD
-<<<<<<< HEAD
         Point headPos = new Point();     // Голова
         Point bluePos = new Point();    // Тело КТ
         Point redPos = new Point();    // Тело Т
         Point rageHead = new Point(); // Голова в большем радиусе
-=======
-        Point headPos = new Point(); // Голова
-        Point bluePos = new Point(); // Тело КТ
-        Point redPos = new Point(); // Тело Т
-        Point rageHead = new Point(); // Голова в большем радиусе
-        Point awpPos = new Point();
->>>>>>> f2530c6 (awp test fix)
-=======
-        Point headPos = new Point();     // Голова
-        Point bluePos = new Point();    // Тело КТ
-        Point redPos = new Point();    // Тело Т
-        Point rageHead = new Point(); // Голова в большем радиусе
->>>>>>> 7c7a2e3 (finally awp fix, optimization, comments)
 
         // Иницализация формы
         public Form1()
@@ -415,11 +402,19 @@ namespace MHAiM
         // Проверка пикселя для AWP
         public static Color GetColorAt(int x, int y)
         {
-            Bitmap bmp = new Bitmap(1, 1);
-            Rectangle bounds = new Rectangle(x - 1, y - 1, 1, 1);
-            using (Graphics g = Graphics.FromImage(bmp))
-                g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
-            return bmp.GetPixel(0, 0);
+            try
+            {
+                Bitmap bmp = new Bitmap(1, 1);
+                Rectangle bounds = new Rectangle(x - 1, y - 1, 1, 1);
+                using (Graphics g = Graphics.FromImage(bmp))
+                    g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
+                return bmp.GetPixel(0, 0);
+            }
+            catch
+            {
+                Bitmap bmp = new Bitmap(1, 1);
+                return bmp.GetPixel(0, 0);
+            }
         }
 
         // Проверка схожести цветов
