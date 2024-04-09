@@ -138,9 +138,11 @@ namespace MHAiM
                     break;
                 // Copilot - общая логика
                 case 7:
+                    copilotAction(headValue, false);
+                    break;
                 // QuickDraw - общая логика
                 case 8:
-                    copiloteAction(state == 8 ? extraValue : headValue, state == 8);
+                    copilotAction(headValue, true);
                     break;
             }
         }
@@ -210,7 +212,7 @@ namespace MHAiM
         }
 
         // Автопилот - Copilot и QuickDraw
-        private void copiloteAction(Point headValue, bool rage)
+        private void copilotAction(Point headValue, bool rage)
         {
             // Если цвет головы найден
             if (!headValue.IsEmpty)
@@ -226,14 +228,8 @@ namespace MHAiM
                 if (rage == true)
                 {
                     inputSimulator.Mouse.LeftButtonClick();
-                    // Короткое ожидание для rage
-                    Thread.Sleep(30);
                 }
-                else
-                {
-                    // Более длительное для Copilot
-                    Thread.Sleep(50);
-                }
+                //Thread.Sleep(5);
             }
         }
 
@@ -249,7 +245,7 @@ namespace MHAiM
                (pixelColor.R < 20 && pixelColor.G < 20 && pixelColor.B > 180))  // Синий
             {
                 inputSimulator.Mouse.LeftButtonClick();
-                Thread.Sleep(70); // Под вопросом
+                Thread.Sleep(50);
                 return;
             }
         }
