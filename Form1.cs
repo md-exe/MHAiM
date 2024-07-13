@@ -19,7 +19,7 @@ namespace MHAiM
 
         // Логика наводки
         private void MainLogic()
-        {
+        { 
             // Вечный цикл
             while (true)
             {
@@ -30,7 +30,7 @@ namespace MHAiM
                 // Поиск пикселя тела Т (красный)
                 redPos = SetPoint(bodyRedColor);
                 // Поиск пикселя головы в rage моде
-                rageHead = FindColorPosition(headColor, 885, 465, 905, 485);
+                rageHead = FindColorPosition(headColor, 915, 495, 935, 515);
 
                 // Смена режимов
                 switch (lastPressedKey)
@@ -218,7 +218,7 @@ namespace MHAiM
             if (!headValue.IsEmpty)
             {
                 // Оффсеты движения
-                xOffset = headValue.X - 890; 
+                xOffset = headValue.X - 890;
                 yOffset = headValue.Y - 475;
 
                 // Движение мыши на голову
@@ -277,7 +277,7 @@ namespace MHAiM
         // Позиция курсора в X и Y
         //int CursorX = Cursor.Position.X;
         //int CursorY = Cursor.Position.Y;
-        
+
         // Позиция курсора по cursorPos.X и cursorPos.Y
         Point cursorPos;
 
@@ -427,9 +427,9 @@ namespace MHAiM
         {
             // Переменная состояния клавиши
             short keyState = GetAsyncKeyState(vKey);
-            
+
             // Возврат, что клавиша зажата
-            return (keyState < 0);      
+            return (keyState < 0);
         }
 
         // Поиск координат цвета

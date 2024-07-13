@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj": {}
+    "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj": {}
   },
   "projects": {
-    "G:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj": {
+    "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
+        "projectUniqueName": "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
         "projectName": "MHAiM",
-        "projectPath": "G:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
-        "packagesPath": "C:\\Users\\404-prep\\.nuget\\packages\\",
-        "outputPath": "G:\\Work\\VS_projects\\MHAiM\\obj\\",
+        "projectPath": "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
+        "packagesPath": "C:\\Users\\md\\.nuget\\packages\\",
+        "outputPath": "F:\\Work\\VS_projects\\MHAiM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\404-prep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\md\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -60,6 +65,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.30, 6.0.30]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -68,7 +91,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

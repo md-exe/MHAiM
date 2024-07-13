@@ -145,5 +145,7 @@
         private Button GlockButton;
         private Button DeagleButton;
         private Label SelectedModeLabel;
+        private Label fovTrackValue;
+        public TrackBar fovTrackBar;
     }
 }
