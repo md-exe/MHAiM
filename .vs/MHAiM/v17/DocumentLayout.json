@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\Work\\VS_projects\\MHAiM\\",
+  "WorkspaceRootPath": "D:\\Soft\\VS\\MHAiM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{220754F4-01A6-4A08-86A7-E74D6BF9557E}|MHAiM.csproj|f:\\work\\vs_projects\\mhaim\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{220754F4-01A6-4A08-86A7-E74D6BF9557E}|MHAiM.csproj|d:\\soft\\vs\\mhaim\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{220754F4-01A6-4A08-86A7-E74D6BF9557E}|MHAiM.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{220754F4-01A6-4A08-86A7-E74D6BF9557E}|MHAiM.csproj|F:\\Work\\VS_projects\\MHAiM\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{220754F4-01A6-4A08-86A7-E74D6BF9557E}|MHAiM.csproj|D:\\Soft\\VS\\MHAiM\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{220754F4-01A6-4A08-86A7-E74D6BF9557E}|MHAiM.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -24,9 +24,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "F:\\Work\\VS_projects\\MHAiM\\Form1.cs",
+              "DocumentMoniker": "D:\\Soft\\VS\\MHAiM\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "F:\\Work\\VS_projects\\MHAiM\\Form1.cs [Design]",
+              "ToolTip": "D:\\Soft\\VS\\MHAiM\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-12T15:26:02.843Z",
@@ -36,11 +36,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "F:\\Work\\VS_projects\\MHAiM\\Form1.cs",
+              "DocumentMoniker": "D:\\Soft\\VS\\MHAiM\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "F:\\Work\\VS_projects\\MHAiM\\Form1.cs",
+              "ToolTip": "D:\\Soft\\VS\\MHAiM\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAaAAAA",
+              "ViewState": "AQIAAOYAAAAAAAAAAAAQwAEBAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-12T15:26:02.918Z",
               "EditorCaption": ""

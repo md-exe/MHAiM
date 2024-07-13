@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj": {}
+    "D:\\Soft\\VS\\MHAiM\\MHAiM.csproj": {}
   },
   "projects": {
-    "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj": {
+    "D:\\Soft\\VS\\MHAiM\\MHAiM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
+        "projectUniqueName": "D:\\Soft\\VS\\MHAiM\\MHAiM.csproj",
         "projectName": "MHAiM",
-        "projectPath": "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
+        "projectPath": "D:\\Soft\\VS\\MHAiM\\MHAiM.csproj",
         "packagesPath": "C:\\Users\\md\\.nuget\\packages\\",
-        "outputPath": "F:\\Work\\VS_projects\\MHAiM\\obj\\",
+        "outputPath": "D:\\Soft\\VS\\MHAiM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\md\\AppData\\Roaming\\NuGet\\NuGet.Config",

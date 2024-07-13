@@ -129,6 +129,7 @@ namespace MHAiM
                     break;
                 // Deagle
                 case 4:
+                    deagleLogic(headValue);
                     break;
                 // Glock
                 case 5:
@@ -211,6 +212,30 @@ namespace MHAiM
             }
         }
 
+        private void deagleLogic(Point headValue)
+        {
+            if (!headValue.IsEmpty)
+            {
+                // Оффсеты движения
+                xOffset = headValue.X - 890;
+                yOffset = headValue.Y - 475;
+
+                // Движение мыши
+                inputSimulator.Mouse.MoveMouseBy(xOffset, yOffset);
+
+                // Рандом
+                //rndValue = rnd.Next(115, 160);
+                //stopValue = rnd.Next(150, 200);
+
+                // Поведение выстрелов
+                inputSimulator.Mouse.LeftButtonClick();
+                Thread.Sleep(160);
+                inputSimulator.Mouse.LeftButtonClick();
+                Thread.Sleep(150);
+            }
+            
+        }
+
         // Автопилот - Copilot и QuickDraw
         private void copilotAction(Point headValue, bool rage)
         {
@@ -228,8 +253,9 @@ namespace MHAiM
                 if (rage == true)
                 {
                     inputSimulator.Mouse.LeftButtonClick();
+                    Thread.Sleep(50);
                 }
-                //Thread.Sleep(5);
+                Thread.Sleep(15);
             }
         }
 

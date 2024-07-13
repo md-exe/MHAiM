@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HKNCOgsss2g=",
+  "dgSpecHash": "1gzuSuWHGrU=",
   "success": true,
-  "projectFilePath": "F:\\Work\\VS_projects\\MHAiM\\MHAiM.csproj",
+  "projectFilePath": "D:\\Soft\\VS\\MHAiM\\MHAiM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\md\\.nuget\\packages\\inputsimulatorplus\\1.0.7\\inputsimulatorplus.1.0.7.nupkg.sha512",
     "C:\\Users\\md\\.nuget\\packages\\mousekeyhook\\5.7.1\\mousekeyhook.5.7.1.nupkg.sha512",
