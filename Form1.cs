@@ -386,39 +386,6 @@ namespace MHAiM
             return getPoint;
         }
 
-        // Функция получение цвета пикселя
-        public static Color GetColorPixel(int x, int y)
-        {
-            Color resultColor = Color.Empty;
-            Task.Run(() =>
-            {
-                try
-                {
-                    using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format32bppArgb))
-                    {
-                        // Минус для прицела AWP
-                        Rectangle lockRectangle = new Rectangle(x - 1, y - 1, 1, 1);
-                        BitmapData data = bmp.LockBits(lockRectangle, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-
-                        unsafe
-                        {
-                            byte* pointer = (byte*)data.Scan0;
-                            byte blue = pointer[0];
-                            byte green = pointer[1];
-                            byte red = pointer[2];
-
-                            return Color.FromArgb(red, green, blue);
-                        }
-                    }
-                }
-                catch
-                {
-                    return Color.Empty;
-                }
-            }).Wait();
-            return resultColor;
-        }
-
         // Проверка пикселя для AWP
         public static Color GetColorAt(int x, int y)
         {
