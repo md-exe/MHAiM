@@ -339,8 +339,6 @@ namespace MHAiM
         #region Бинды
         // Бинд зажима
         private Keys notPilote = Keys.LButton;
-        // Бинд триггера
-        private Keys TriggetBtn = Keys.T;
         #endregion
 
         #region Цвета
