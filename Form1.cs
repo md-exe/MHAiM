@@ -20,8 +20,6 @@ namespace MHAiM
 
         // Бинд зажима
         private Keys notPilote = Keys.LButton;
-        // Бинд триггера
-        private Keys TriggetBtn = Keys.T;
 
         // Инициализация цветов
         private Color headColor = Color.FromArgb(0x00, 0xFF, 0x00);
@@ -253,7 +251,7 @@ namespace MHAiM
                         for (int y = 0; y < screenshot.Height; y++)
                         {
                             Color pixelColor = screenshot.GetPixel(x, y);
-                            if (AreColorsSimilar(targetColor, pixelColor, 15))
+                            if (AreColorsSimilar(targetColor, pixelColor, 25))
                             {
                                 return new Point(x + startX, y + startY);
                             }
@@ -297,18 +295,18 @@ namespace MHAiM
         // Триггер для AWP
         public void AWPtrigger()
         {
+            Point cursorPos;
+            GetCursorPos(out cursorPos);
+
             // Получение пикселя по координатам
-            Color pixelColor = GetColorPixel(CursorX, CursorY);
+            Color pixelColor = GetColorPixel(cursorPos.X, cursorPos.Y);
             // Проверка цвета по RGB
-            if ((pixelColor.R > 180 && pixelColor.G < 10 && pixelColor.B < 10) || // Красный
-               (pixelColor.R < 10 && pixelColor.G < 10 && pixelColor.B > 180) || // Синий
-               (pixelColor.R < 10 && pixelColor.G > 180 && pixelColor.B < 10))  // Зелёный
+            if ((pixelColor.R > 140 && pixelColor.G < 10 && pixelColor.B < 10) || // Красный
+               (pixelColor.R < 10 && pixelColor.G < 10 && pixelColor.B > 140) || // Синий
+               (pixelColor.R < 10 && pixelColor.G > 140 && pixelColor.B < 10))  // Зелёный
             {
-                if (!IsHotkeyPressed(TriggetBtn))
-                {
-                    inputSimulator.Mouse.LeftButtonClick();
-                    return;
-                }
+                inputSimulator.Mouse.LeftButtonClick();
+                return;
             }
         }
 
@@ -318,12 +316,12 @@ namespace MHAiM
             try
             {
                 // Цвет пикселя под курсором
-                Bitmap bmp = new Bitmap(3, 3);
+                Bitmap bmp = new Bitmap(1, 1);
                 // -1, -1 для смещения на пиксель выше, ибо прицел у AWP красный
-                Rectangle bounds = new Rectangle(x - 1, y - 1, 3, 3);
+                Rectangle bounds = new Rectangle(x - 1, y - 1, 1, 1);
                 using (Graphics g = Graphics.FromImage(bmp))
                     g.CopyFromScreen(bounds.Location, Point.Empty, bounds.Size);
-                return bmp.GetPixel(1, 0);
+                return bmp.GetPixel(0, 0);
             }
             catch
             {
