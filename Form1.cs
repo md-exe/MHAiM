@@ -1,4 +1,3 @@
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using WindowsInput;
 using WindowsInput.Native;
@@ -7,16 +6,6 @@ namespace MHAiM
 {
     public partial class Form1 : Form
     {
-
-        // Изменения:
-        // Добавил функцию GetColorAt() - поиск цвета пикселя, аналогично GetColorPixel(), но без LockBits;
-        // Убрал CursorX, CursorY - использовав GetCursorPos(out cursorPos), дальнейшее использование через cursorPos.X, cursorPos.Y;
-
-        // Задачи:
-        // Сделать меньше радиус у всех дефолтных поинтов, оставив (885, 465, 905, 485) для rage мода;
-        // Попытаться совместить GetColorPixel() и GetColorAt() или добавить логику GetColorAt() внутрь awpLogic();
-        // Сделать Bhop: возможно, через просто прыжки, возможно, добавив стрейфы;
-
         // Логика наводки
         private void MainLogic()
         { 
